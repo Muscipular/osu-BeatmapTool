@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Windows;
 using System.Xml;
 using System.Threading;
+using BeatmapTool.Helpers;
 
 namespace BeatmapTool
 {
@@ -46,8 +47,8 @@ namespace BeatmapTool
             STR_DOWNLOADLIST = "下载Beatmap列表中[{0}%]...";
             STR_STOP = "中断操作?";
             STR_REPLACEBGFAILED = "替换背景失败!";
-            STR_PATH="目录";
-            STR_FILE="文件";
+            STR_PATH = "目录";
+            STR_FILE = "文件";
             STR_MSG = "信息";
             STR_DELETEFAILED = "删除失败!";
             STR_DELSKINFAILED = "删除皮肤失败!";
@@ -60,7 +61,8 @@ namespace BeatmapTool
             get { return debug; }
             set { debug = value; }
         }
-        public static UIBinding uiBinding {
+        public static UIBinding uiBinding
+        {
             get { return _uiBinding; }
             set { _uiBinding = value; }
         }
@@ -177,7 +179,7 @@ namespace BeatmapTool
                     {
                         using (StreamReader sr = new StreamReader(res.GetResponseStream(), Encoding.UTF8))
                         {
-                            string str=sr.ReadToEnd();
+                            string str = sr.ReadToEnd();
                             try
                             {
                                 string tstr = "<span id='seconds'>";
@@ -285,48 +287,7 @@ namespace BeatmapTool
 
             return DownLoadState.Done;
         }*/
-        public static byte[] Compress(byte[] data)
-        {
-            byte[] buffer = null;
-            using (MemoryStream stream = new MemoryStream())
-            {
-                using (GZipStream gZipStream = new GZipStream(stream, CompressionMode.Compress))
-                {
-                    gZipStream.Write(data, 0, data.Length);
-                }
-                buffer = stream.ToArray();
-            }
-            return buffer;
-        }
-        public static byte[] Decompress(byte[] data)
-        {
-            byte[] buffer = null;
-            using (MemoryStream stream = new MemoryStream())
-            {
-                using (GZipStream gZipStream = new GZipStream(new MemoryStream(data), CompressionMode.Decompress))
-                {
-                    buffer = new byte[4096];
-                    int n;
-                    while ((n = gZipStream.Read(buffer, 0, buffer.Length)) != 0)
-                    {
-                        stream.Write(buffer, 0, n);
-                    }
-                }
-                buffer = stream.ToArray();
-            }
-            return buffer;
-        }
-        public static string GetHash(Stream stream)
-        {
-            byte[] hash = md5.ComputeHash(stream);
-            StringBuilder Hash = new StringBuilder();            
-            foreach (byte b in hash)
-            {
-                Hash.AppendFormat("{0:X2}", b);
-            }
-            //md5.Dispose();
-            return Hash.ToString();
-        }
+
         public static Dictionary<int, List<string>> GetKeys(string key)
         {
             key = key.ToLower();
@@ -440,7 +401,7 @@ namespace BeatmapTool
         {
             using (StreamWriter sw = File.CreateText(path))
             {
-                using (StreamReader sr = new StreamReader(new MemoryStream(Decompress(Properties.Resources.t_html))))
+                using (StreamReader sr = new StreamReader(new MemoryStream(DataHelper.Decompress(Properties.Resources.t_html))))
                 {
                     sw.WriteLine(sr.ReadLine());
                     sr.ReadLine();
@@ -590,7 +551,7 @@ namespace BeatmapTool
             //string a = reg.Matches(html).Result("$1");
             Regex reg = new Regex("page=\\d+.>(\\d+)</a>", RegexOptions.Compiled);
             MatchCollection a = reg.Matches(html);
-            return int.Parse(a[a.Count-1].Result("$1"));
+            return int.Parse(a[a.Count - 1].Result("$1"));
         }
         private static string getHtml(string url)
         {
@@ -773,7 +734,7 @@ namespace BeatmapTool
                         return false;
                 if (str.Id != 0)
                     list.Add(str);
-            }            
+            }
             return true;
         }
         public static void BeatmapListing()
@@ -919,7 +880,7 @@ namespace BeatmapTool
             "selection"   //mod
         };
         #endregion
-        
+
         public static string[] GetMp3Files(LocalSong song)
         {
             List<string> mp3 = new List<string>();
@@ -945,7 +906,7 @@ namespace BeatmapTool
 
         public static string GetPathX(LocalSong song)
         {
-            return song.Path.Substring(OsuPath.Length+1);
+            return song.Path.Substring(OsuPath.Length + 1);
         }
         private static void BackUp(string src, LocalSong song, bool isDir = false)
         {
@@ -1006,7 +967,7 @@ namespace BeatmapTool
         /// <param name="song"></param>
         /// <param name="mode">true=删除所有;false=删除Note</param>
         /// <param name="backup"></param>
-        public static void RemoveSkin(LocalSong song,bool mode,bool backup)
+        public static void RemoveSkin(LocalSong song, bool mode, bool backup)
         {
             int max = 9;
             string[] files = Directory.GetFiles(song.Path);
@@ -1040,7 +1001,7 @@ namespace BeatmapTool
                 }
             }
         }
-        public static void RemoveSound(LocalSong song,bool backup)
+        public static void RemoveSound(LocalSong song, bool backup)
         {
             string[] files = Directory.GetFiles(song.Path);
             string[] mp3 = GetMp3Files(song);
@@ -1173,7 +1134,7 @@ namespace BeatmapTool
                 if (MessageBox.Show(STR_STOP, "", MessageBoxButton.YesNo) == MessageBoxResult.Yes) throw new StopException();
             }
         }
-        public static void ReplaceSongBg(LocalSong song,System.Drawing.Image img,bool backup)
+        public static void ReplaceSongBg(LocalSong song, System.Drawing.Image img, bool backup)
         {
             try
             {

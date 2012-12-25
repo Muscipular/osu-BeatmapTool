@@ -147,6 +147,7 @@
     <Compile Include="DownloadWin.xaml.cs">
       <DependentUpon>DownloadWin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DataHelper.cs" />
     <Compile Include="Mp3Player.cs" />
     <Compile Include="RankedList.cs" />
     <Compile Include="Replay.cs" />

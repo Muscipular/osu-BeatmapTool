@@ -4,6 +4,7 @@ using System.Text;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
+using BeatmapTool.Helpers;
 
 namespace BeatmapTool
 {
@@ -74,7 +75,7 @@ namespace BeatmapTool
                     sw.Write(app);
                     sw.Flush();
                 }
-                x = Core.Compress(ms.ToArray());
+                x = DataHelper.Compress(ms.ToArray());
             }
             using (FileStream fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
             {
@@ -107,7 +108,7 @@ namespace BeatmapTool
             string[] sd = new string[11];
             try
             {
-                using (StreamReader sr = new StreamReader(new MemoryStream(Core.Decompress(buffer))))
+                using (StreamReader sr = new StreamReader(new MemoryStream(DataHelper.Decompress(buffer))))
                 {
                     bool isApp = false;
                     string ver = sr.ReadLine();
