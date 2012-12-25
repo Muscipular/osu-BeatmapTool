@@ -1,0 +1,22 @@
+﻿<UserControl
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	mc:Ignorable="d"
+	x:Class="BeatmapTool.OsuIcon"
+	x:Name="UserControl"
+	d:DesignWidth="80" d:DesignHeight="80">
+	<UserControl.Resources>
+		<Storyboard x:Key="Storyboard1" RepeatBehavior="Forever" AutoReverse="False">
+			<ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Margin)" Storyboard.TargetName="image">
+				<EasingThicknessKeyFrame KeyTime="0" Value="8"/>
+				<EasingThicknessKeyFrame KeyTime="0:0:0.15" Value="0"/>
+				<EasingThicknessKeyFrame KeyTime="0:0:0.7" Value="8"/>
+			</ThicknessAnimationUsingKeyFrames>
+		</Storyboard>
+	</UserControl.Resources>
+	<Grid x:Name="LayoutRoot" Height="74" Width="74">
+		<Image x:Name="image" Margin="8" Stretch="UniformToFill" Source="/BeatmapTool v0.5;component/Images/osuIcon.png"/>
+	</Grid>
+</UserControl>

@@ -1,0 +1,58 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Microsoft_Windows_Themes="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+    <Style x:Key="CheckBoxStyle1" TargetType="{x:Type CheckBox}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <Border x:Name="border" BorderThickness="1" CornerRadius="3" BorderBrush="{TemplateBinding BorderBrush}" Background="{x:Null}">
+                        <DockPanel x:Name="grid" Background="#62B1C1E7" OpacityMask="{x:Null}" >
+                            <Label x:Name="label" Height="Auto" VerticalAlignment="Bottom" Width="Auto" Padding="2" Foreground="{TemplateBinding Foreground}" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{TemplateBinding Content}">
+                            </Label>
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Trigger.ExitActions>
+                                <BeginStoryboard>
+                                	<Storyboard>
+                                		<ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="label"
+                                			Duration="0:0:0.3"/>
+									</Storyboard>                        
+								</BeginStoryboard>
+                            </Trigger.ExitActions>
+                            <Trigger.EnterActions>
+                                <BeginStoryboard>
+                                	<Storyboard>
+                                		<ColorAnimation Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="label"
+                                			From="#00ABD9F7" To="#8CABD9F7" Duration="0:0:0.3"/>
+									</Storyboard>                        
+								</BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Trigger.ExitActions>
+                            	<BeginStoryboard>
+                            		<Storyboard>
+                            			<ColorAnimation Duration="0:0:0.3" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid"/>
+									</Storyboard>
+								</BeginStoryboard>
+                            </Trigger.ExitActions>
+                            <Trigger.EnterActions>
+                            	<BeginStoryboard>
+                            		<Storyboard>
+                            			<ColorAnimation Duration="0:0:0.3" From="#62B1C1E7" To="#622d7dd8" Storyboard.TargetProperty="(Panel.Background).(SolidColorBrush.Color)" Storyboard.TargetName="grid"/>
+									</Storyboard>
+								</BeginStoryboard>
+                            </Trigger.EnterActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

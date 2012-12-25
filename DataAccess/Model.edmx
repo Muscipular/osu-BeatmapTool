@@ -1,0 +1,229 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbModel.Store" Alias="Self" Provider="System.Data.SQLite" ProviderManifestToken="ISO8601" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="dbModelStoreContainer">
+          <EntitySet Name="Beatmap" EntityType="dbModel.Store.Beatmap" store:Type="Tables" />
+          <EntitySet Name="BeatmapSet" EntityType="dbModel.Store.BeatmapSet" store:Type="Tables" />
+          <EntitySet Name="Setting" EntityType="dbModel.Store.Setting" store:Type="Tables" />
+        </EntityContainer>
+        <EntityType Name="Beatmap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Sid" Type="int" />
+          <Property Name="Hash" Type="nvarchar" />
+          <Property Name="Difficulty" Type="nvarchar" />
+          <Property Name="Tag" Type="nvarchar" />
+          <Property Name="Background" Type="nvarchar" />
+          <Property Name="Audio" Type="nvarchar" />
+          <Property Name="AudioLeadIn" Type="int" />
+          <Property Name="PreviewTime" Type="int" />
+          <Property Name="Mode" Type="int" />
+          <Property Name="HPDrainRate" Type="int" />
+          <Property Name="CircleSize" Type="int" />
+          <Property Name="OverallDifficulty" Type="int" />
+          <Property Name="ApproachRate" Type="int" />
+          <Property Name="SliderMultiplier" Type="float" />
+          <Property Name="NodeCount" Type="int" />
+          <Property Name="SliderCount" Type="int" />
+          <Property Name="SpinnerCount" Type="int" />
+          <Property Name="MaxCombo" Type="int" />
+          <Property Name="DrainingTime" Type="int" />
+          <Property Name="Ops" Type="float" />
+          <Property Name="Bpm" Type="float" />
+          <Property Name="SliderTickRate" Type="float" />
+          <Property Name="Path" Type="nvarchar" />
+          <Property Name="Bid" Type="int" />
+        </EntityType>
+        <EntityType Name="BeatmapSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="integer" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Sid" Type="int" />
+          <Property Name="Title" Type="nvarchar" />
+          <Property Name="Creator" Type="nvarchar" />
+          <Property Name="Artist" Type="nvarchar" />
+          <Property Name="Source" Type="nvarchar" />
+          <Property Name="CreatorId" Type="int" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="Pack" Type="nvarchar" />
+          <Property Name="Type" Type="int" />
+          <Property Name="Lang" Type="int" />
+          <Property Name="Genre" Type="int" />
+          <Property Name="Video" Type="int" />
+          <Property Name="Path" Type="nvarchar" />
+          <Property Name="Tag" Type="nvarchar" />
+          <Property Name="DiffCount" Type="int" />
+          <Property Name="Audio" Type="nvarchar" />
+          <Property Name="Flag" Type="int" />
+          <Property Name="Tid" Type="int" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="nvarchar" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Beatmap" EntityType="dbModel.Beatmap" />
+          <EntitySet Name="BeatmapSet" EntityType="dbModel.BeatmapSet" />
+          <EntitySet Name="Setting" EntityType="dbModel.Setting" />
+        </EntityContainer>
+        <EntityType Name="Beatmap">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sid" Type="Int32" />
+          <Property Name="Hash" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="Difficulty" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="Tag" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="Background" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="Audio" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="AudioLeadIn" Type="Int32" />
+          <Property Name="PreviewTime" Type="Int32" />
+          <Property Name="Mode" Type="Int32" />
+          <Property Name="HPDrainRate" Type="Int32" />
+          <Property Name="CircleSize" Type="Int32" />
+          <Property Name="OverallDifficulty" Type="Int32" />
+          <Property Name="ApproachRate" Type="Int32" />
+          <Property Name="SliderMultiplier" Type="Double" />
+          <Property Name="NodeCount" Type="Int32" />
+          <Property Name="SliderCount" Type="Int32" />
+          <Property Name="SpinnerCount" Type="Int32" />
+          <Property Name="MaxCombo" Type="Int32" />
+          <Property Name="DrainingTime" Type="Int32" />
+          <Property Name="Ops" Type="Double" />
+          <Property Name="Bpm" Type="Double" />
+          <Property Name="SliderTickRate" Type="Double" />
+          <Property Name="Path" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="Bid" />
+        </EntityType>
+        <EntityType Name="BeatmapSet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sid" Type="Int32" />
+          <Property Name="Title" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="Creator" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="Artist" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="Source" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="CreatorId" Type="Int32" />
+          <Property Name="Date" Type="DateTime" />
+          <Property Name="Pack" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="Type" Type="Int32" />
+          <Property Name="Lang" Type="Int32" />
+          <Property Name="Genre" Type="Int32" />
+          <Property Name="Video" Type="Int32" />
+          <Property Name="Path" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="Tag" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="DiffCount" Type="Int32" />
+          <Property Name="Audio" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="Flag" Type="Int32" />
+          <Property Type="Int32" Name="Tid" />
+        </EntityType>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="Key" />
+          </Key>
+          <Property Name="Key" Type="String" Nullable="false" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+          <Property Name="Value" Type="String" MaxLength="2147483647" Unicode="true" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbModelStoreContainer" CdmEntityContainer="dbEntities">
+          <EntitySetMapping Name="Beatmap"><EntityTypeMapping TypeName="dbModel.Beatmap"><MappingFragment StoreEntitySet="Beatmap">
+            <ScalarProperty Name="Bid" ColumnName="Bid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+            <ScalarProperty Name="Sid" ColumnName="Sid" />
+            <ScalarProperty Name="Hash" ColumnName="Hash" />
+            <ScalarProperty Name="Difficulty" ColumnName="Difficulty" />
+            <ScalarProperty Name="Tag" ColumnName="Tag" />
+            <ScalarProperty Name="Background" ColumnName="Background" />
+            <ScalarProperty Name="Audio" ColumnName="Audio" />
+            <ScalarProperty Name="AudioLeadIn" ColumnName="AudioLeadIn" />
+            <ScalarProperty Name="PreviewTime" ColumnName="PreviewTime" />
+            <ScalarProperty Name="Mode" ColumnName="Mode" />
+            <ScalarProperty Name="HPDrainRate" ColumnName="HPDrainRate" />
+            <ScalarProperty Name="CircleSize" ColumnName="CircleSize" />
+            <ScalarProperty Name="OverallDifficulty" ColumnName="OverallDifficulty" />
+            <ScalarProperty Name="ApproachRate" ColumnName="ApproachRate" />
+            <ScalarProperty Name="SliderMultiplier" ColumnName="SliderMultiplier" />
+            <ScalarProperty Name="NodeCount" ColumnName="NodeCount" />
+            <ScalarProperty Name="SliderCount" ColumnName="SliderCount" />
+            <ScalarProperty Name="SpinnerCount" ColumnName="SpinnerCount" />
+            <ScalarProperty Name="MaxCombo" ColumnName="MaxCombo" />
+            <ScalarProperty Name="DrainingTime" ColumnName="DrainingTime" />
+            <ScalarProperty Name="Ops" ColumnName="Ops" />
+            <ScalarProperty Name="Bpm" ColumnName="Bpm" />
+            <ScalarProperty Name="SliderTickRate" ColumnName="SliderTickRate" />
+            <ScalarProperty Name="Path" ColumnName="Path" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="BeatmapSet"><EntityTypeMapping TypeName="dbModel.BeatmapSet"><MappingFragment StoreEntitySet="BeatmapSet">
+            <ScalarProperty Name="Tid" ColumnName="Tid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Sid" ColumnName="Sid" />
+            <ScalarProperty Name="Title" ColumnName="Title" />
+            <ScalarProperty Name="Creator" ColumnName="Creator" />
+            <ScalarProperty Name="Artist" ColumnName="Artist" />
+            <ScalarProperty Name="Source" ColumnName="Source" />
+            <ScalarProperty Name="CreatorId" ColumnName="CreatorId" />
+            <ScalarProperty Name="Date" ColumnName="Date" />
+            <ScalarProperty Name="Pack" ColumnName="Pack" />
+            <ScalarProperty Name="Type" ColumnName="Type" />
+            <ScalarProperty Name="Lang" ColumnName="Lang" />
+            <ScalarProperty Name="Genre" ColumnName="Genre" />
+            <ScalarProperty Name="Video" ColumnName="Video" />
+            <ScalarProperty Name="Path" ColumnName="Path" />
+            <ScalarProperty Name="Tag" ColumnName="Tag" />
+            <ScalarProperty Name="DiffCount" ColumnName="DiffCount" />
+            <ScalarProperty Name="Audio" ColumnName="Audio" />
+            <ScalarProperty Name="Flag" ColumnName="Flag" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Setting"><EntityTypeMapping TypeName="dbModel.Setting"><MappingFragment StoreEntitySet="Setting">
+            <ScalarProperty Name="Key" ColumnName="Key" />
+            <ScalarProperty Name="Value" ColumnName="Value" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Model">
+        <EntityTypeShape EntityType="dbModel.Beatmap" Width="1.5" PointX="0.75" PointY="0.75" Height="5.59940673828125" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.BeatmapSet" Width="1.5" PointX="2.75" PointY="0.75" Height="4.45328857421875" IsExpanded="true" />
+        <EntityTypeShape EntityType="dbModel.Setting" Width="1.5" PointX="4.75" PointY="0.75" Height="1.3969734700520826" IsExpanded="true" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

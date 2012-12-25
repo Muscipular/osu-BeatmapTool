@@ -1,0 +1,19 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System;assembly=mscorlib">
+    <s:String x:Key="MainWindowTitle">Beatmap小工具</s:String>
+    <s:String x:Key="String_Local_Count">已下载的Beatmap:</s:String>
+    <s:String x:Key="String_Rank_Count">Ranked Beatmap:</s:String>
+    <s:String x:Key="String_CF_Count">重复的Beatmap:</s:String>
+    <s:String x:Key="String_Need_Count">缺少的Beatmap:</s:String>
+    <s:String x:Key="String_Btn_Setting">设置</s:String>
+    <s:String x:Key="Sting_Btn_MoreCondition">显示更多选项</s:String>
+    <s:String x:Key="String_Btn_MoreOpera">显示批量操作</s:String>
+    <s:String x:Key="String_Chk_CF">重复的Beatmap</s:String>
+    <s:String x:Key="String_Chk_Need">缺少的Beatmap</s:String>
+    <s:String x:Key="String_Chk_Ranked">RankedBeatmap</s:String>
+    <s:String x:Key="String_Chk_Local">已下载的Beatmap</s:String>
+    <s:String x:Key="String_Label_Search">搜索:</s:String>
+    <s:String x:Key="String_OsuIco_Tips">启动OSU!</s:String>
+</ResourceDictionary>

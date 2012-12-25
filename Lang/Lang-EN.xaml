@@ -1,0 +1,19 @@
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System;assembly=mscorlib">
+    <s:String x:Key="MainWindowTitle">BeatmapTool</s:String>
+    <s:String x:Key="String_Local_Count">Local Beatmap:</s:String>
+    <s:String x:Key="String_Rank_Count">RankedBeatmap:</s:String>
+    <s:String x:Key="String_CF_Count">Redundance:</s:String>
+    <s:String x:Key="String_Need_Count">Missing:</s:String>
+    <s:String x:Key="String_Btn_Setting">Setting</s:String>
+    <s:String x:Key="Sting_Btn_MoreCondition">More Condition</s:String>
+    <s:String x:Key="String_Btn_MoreOpera">Batch Processing</s:String>
+    <s:String x:Key="String_Chk_CF">Redundance</s:String>
+    <s:String x:Key="String_Chk_Need">Missing</s:String>
+    <s:String x:Key="String_Chk_Ranked">RankedBeatmap</s:String>
+    <s:String x:Key="String_Chk_Local">Local Beatmap</s:String>
+    <s:String x:Key="String_Label_Search">Search:</s:String>
+    <s:String x:Key="String_OsuIco_Tips">Start OSU!</s:String>
+</ResourceDictionary>
