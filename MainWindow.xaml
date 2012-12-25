@@ -1,0 +1,387 @@
+﻿<Window xmlns:my="clr-namespace:BeatmapTool"  x:Class="BeatmapTool.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Just You Know Why" ResizeMode="NoResize" WindowStyle="None"
+        WindowStartupLocation="CenterScreen" Width="500" Height="377" AllowsTransparency="True"
+        Loaded="Window_Loaded" Icon="/BeatmapTool;component/img/XX.ico" Background="#00317AC5">
+    <Window.Resources>
+        <my:RankingConverter x:Key="rankingConverter"/>
+        <Style x:Key="ListBoxStyle1" TargetType="{x:Type ListBox}">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border BorderBrush="DarkSlateBlue" BorderThickness="2" CornerRadius="2" Padding="2" Margin="1" Width="Auto" Height="Auto">
+                            <Expander Expanded="Expander_Expanded" Focusable="False" Width="457" Collapsed="Expander_Collapsed">
+                                <Expander.Header>
+                                        <DockPanel MouseEnter="ExpHeaderGrid_MouseEnter" MouseLeave="ExpHeaderGrid_MouseEnter" ClipToBounds="True">
+                                            <TextBlock Text="{Binding}" FontWeight="Bold" Foreground="#FF317AC5" ToolTip="{Binding}">
+                                            </TextBlock>
+                                        </DockPanel>
+                                </Expander.Header>
+                                <DockPanel LastChildFill="False">
+                                    <DockPanel.Resources>
+                                        <Style  TargetType="{x:Type Button}">
+                                            <Setter Property="Width" Value="80"/>
+                                            <Setter Property="Margin" Value="1,0,18,0"/>
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                        </Style>
+                                        <Style TargetType="{x:Type Label}">
+                                            <Setter Property="Margin" Value="1,1,0,1"/>
+                                            <Setter Property="Padding" Value="0"/>
+                                        </Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                            <Setter Property="Margin" Value="1,0,6,0"/>
+                                        </Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Setter Property="Height" Value="90"/>
+                                            <Setter Property="Width" Value="120"/>
+                                            <Setter Property="Margin" Value="1,3,1,1"/>
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                        </Style>
+                                    </DockPanel.Resources>
+                                </DockPanel>
+                            </Expander>
+                        </Border>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="ListBoxStyle2" TargetType="{x:Type ListBox}">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border BorderBrush="DarkSlateBlue" BorderThickness="2" CornerRadius="2" Padding="2" Margin="1" Width="Auto" Height="Auto">
+                            <Expander Expanded="RepExpander_Expanded" Focusable="False" Width="437" Collapsed="RepExpander_Collapsed">
+                                <Expander.Header>
+                                    <DockPanel>
+                                        <Image Width="25" Height="32" Source="{Binding Path=Ranking,Converter={StaticResource rankingConverter}}"></Image>
+                                        <WrapPanel>
+                                            <DockPanel MouseEnter="ExpHeaderGrid_MouseEnter" MouseLeave="ExpHeaderGrid_MouseEnter" ClipToBounds="True" MinWidth="250" LastChildFill="False">
+                                                <TextBlock Text="{Binding Path=SongInfo}" FontWeight="Bold" Foreground="#FF317AC5" ToolTip="{Binding Path=SongInfo}"/>
+                                            </DockPanel>
+                                            <TextBlock FontWeight="Bold" Foreground="#FF317AC5">
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="Player:{0}  Diff:[{1}]">
+                                                        <Binding Path="Player"/>
+                                                        <Binding Path="Difficulty"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </WrapPanel>
+                                    </DockPanel>
+                                </Expander.Header>
+                                <StackPanel>
+                                    <StackPanel.Resources>
+                                        <Style  TargetType="{x:Type Button}">
+                                            <Setter Property="Width" Value="80"/>
+                                            <Setter Property="Margin" Value="10,1,10,0"/>
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                        </Style>
+                                        <Style TargetType="{x:Type Label}">
+                                            <Setter Property="Margin" Value="1,1,0,1"/>
+                                            <Setter Property="Padding" Value="0"/>
+                                        </Style>
+                                        <Style TargetType="{x:Type CheckBox}">
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                            <Setter Property="Margin" Value="1,0,6,0"/>
+                                        </Style>
+                                        <Style TargetType="{x:Type Image}">
+                                            <Setter Property="Height" Value="90"/>
+                                            <Setter Property="Width" Value="120"/>
+                                            <Setter Property="Margin" Value="1,7,1,1"/>
+                                        </Style>
+                                    </StackPanel.Resources>
+                                </StackPanel>
+                            </Expander>
+                        </Border>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border BorderThickness="1" CornerRadius="3" BorderBrush="#9AABABAB">
+        <Border.BitmapEffect>
+            <OuterGlowBitmapEffect Opacity="0.8" GlowSize="5" GlowColor="#9AABABAB"></OuterGlowBitmapEffect>
+        </Border.BitmapEffect>
+        <Grid Background="White" MouseDown="Grid_MouseDown" Name="TopGrid">
+            <Grid.Resources>
+                <Style x:Key="SysBtnStyle" BasedOn="{StaticResource BtnStyle1}" TargetType="{x:Type Button}">
+                    <Setter Property="Width" Value="25"/>
+                    <Setter Property="Height" Value="19"/>
+                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                    <Setter Property="VerticalAlignment" Value="Top"/>
+                    <Setter Property="Focusable" Value="False"/>
+                    <Setter Property="BorderBrush" Value="#B4000000"/>
+                    <Setter Property="Panel.ZIndex" Value="99999"/>
+                    <Setter Property="IsTabStop" Value="False"/>
+                    <Setter Property="FontWeight" Value="Bold"/>
+                    <Setter Property="FontSize" Value="11"/>
+                    <Setter Property="Padding" Value="0"/>
+                </Style>
+                <Style x:Key="cbxCol0" TargetType="{x:Type CheckBox}">
+                    <Setter Property="Grid.Column" Value="0"/>
+                    <Setter Property="Margin" Value="10,3,0,0"/>
+                </Style>
+                <Style x:Key="cbxCol1" TargetType="{x:Type CheckBox}">
+                    <Setter Property="Grid.Column" Value="1"/>
+                    <Setter Property="Margin" Value="40,3,0,0"/>
+                </Style>
+                <Style x:Key="cbxCol2" TargetType="{x:Type CheckBox}">
+                    <Setter Property="Grid.Column" Value="2"/>
+                    <Setter Property="Margin" Value="30,3,0,0"/>
+                </Style>
+            </Grid.Resources>
+            <Button Style="{StaticResource SysBtnStyle}" Margin="0,1,1,0" Foreground="White" Background="#FFBA1818" Name="BtnClose" Click="BtnClose_Click" ToolTip="关闭">X</Button>
+            <Button Style="{StaticResource SysBtnStyle}" Margin="0,1,27,0" Foreground="#FF53539A" Background="Silver" Name="BtnMin" Click="BtnMin_Click" ToolTip="最小化">━</Button>
+            <Button Style="{StaticResource SysBtnStyle}" Margin="0,1,53,0" Foreground="#FF53539A" Background="Silver" Name="BtnAbout" Click="BtnAbout_Click" ToolTip="关于">?</Button>
+            <CheckBox Margin="0,4,81,0" Unchecked="CheckBox_Click" Checked="CheckBox_Click" ToolTip="总在最上" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+            <Button Name="OsuBtn" Margin="1,1,0,0" Width="66" Height="21" Panel.ZIndex="9999" HorizontalAlignment="Left" VerticalAlignment="Top"
+                    Focusable="False" IsTabStop="False" Click="OsuBtn_Click" IsEnabled="False" Cursor="Hand">
+                <Grid>
+                    <Image Source="/BeatmapTool;component/img/OsuIcon.ico" HorizontalAlignment="Left" Margin="0,0,0,0"></Image>
+                    <TextBlock Margin="18,0,0,0">osu!</TextBlock>
+                </Grid>
+                <Button.ToolTip>启动OSU！</Button.ToolTip>
+            </Button>
+            <TabControl Height="Auto" HorizontalAlignment="Stretch" Margin="0" Name="tabControl1" 
+                        VerticalAlignment="Stretch" Width="Auto" MouseDown="tabControl1_MouseDown" Padding="1">
+                <TabControl.Resources>
+                    <Style TargetType="{x:Type TabItem}">
+                        <Setter Property="Width" Value="65"/><!--
+                        <Setter Property="Cursor" Value="Hand"/>-->
+                    </Style>
+                    <Style x:Key="tabGrid" TargetType="{x:Type Grid}">
+                        <Setter Property="Background" Value="#e0f0f0f0"/>
+                        <Setter Property="Height" Value="Auto"/>
+                        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                        <Setter Property="Margin" Value="0"/>
+                        <Setter Property="VerticalAlignment" Value="Stretch"/>
+                        <Setter Property="Width" Value="Auto"/>
+                    </Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Setter Property="BorderThickness" Value="1"/>
+                        <Setter Property="BorderBrush" Value="#80000000"/>
+                    </Style>
+                    <Style TargetType="{x:Type TextBox}">
+                        <Setter Property="Height" Value="20"/>
+                    </Style>
+                </TabControl.Resources>
+                <TabItem IsEnabled="False"></TabItem>
+                <TabItem Name="tabMain" Selector.IsSelected="True" Header="主页">
+                    <Border>
+                        <Grid Name="MGrid" Style="{StaticResource tabGrid}">
+                            <GroupBox Header="设置" Margin="2,79,2,0" Name="GboxSet" VerticalAlignment="Top" Height="50">
+                                <Grid  Style="{StaticResource tabGrid}" Margin="0,3,0,0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="66"/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="90"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock  Grid.Column="0" Grid.Row="0" Margin="8,3,0,0">osu!目录:</TextBlock>
+                                    <TextBox Name="tbxOsuPath" Height="20" IsReadOnly="True"  Grid.Column="1" Grid.Row="0" Margin="0,0,0,0"/>
+                                    <Button Name="BtnSetPath" Click="BtnSetPath_Click" Height="20" Width="80" Grid.Column="2" Grid.Row="0"
+                                            Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Top">设置</Button>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox Header="获取Beatmap列表" Margin="2,135,2,0" Name="GboxGetList" VerticalAlignment="Top" Height="50" IsEnabled="False">
+                                <Grid  Style="{StaticResource tabGrid}" Margin="0,3,0,0">
+                                     <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <CheckBox Name="cbxCache" Content="获取中转的缓存列表" Grid.Row="0" Grid.Column="0" Margin="10,3,0,0"
+                                              IsChecked="{Binding Path=IsCache}" ToolTip="从中转服务器获取预生成的列表(每天北京时间08:08更新)"/>
+                                    <CheckBox Name="cbxReBuild" Content="重建Beatmap列表" Grid.Column="1" Grid.Row="0" Margin="40,3,0,0"
+                                              IsChecked="{Binding Path=IsReBuild}" IsEnabled="{Binding Path=IsNotCache}"/>
+                                    <Button Name="BtnGetList" Content="更新列表" Height="20" Width="80" Grid.Column="2" Grid.Row="0"
+                                            Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Top"
+                                            IsEnabled="{Binding Path=IsNotWorking}" Click="BtnGetList_Click"/>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox Header="主要功能" Margin="2,196,2,0" Name="GboxDoWork" VerticalAlignment="Top" Height="90" IsEnabled="False">
+                                <Grid Margin="0,3,0,0" >
+                                    <Grid ClipToBounds="True">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <CheckBox Name="cbxDelDu" Content="删除重复的Beatmap" Style="{StaticResource cbxCol0}" 
+                                                    IsChecked="{Binding Path=IsDelDu}"/>
+                                        <CheckBox Name="cbxDelSkin" Content="删除皮肤" Grid.Row="0" Style="{StaticResource cbxCol1}"
+                                                    IsChecked="{Binding Path=IsDelSkin}"/>
+                                        <CheckBox Name="cbxReplaceBG" Content="替换背景图" Style="{StaticResource cbxCol2}"
+                                                    IsChecked="{Binding Path=IsReplaceBg}" Checked="cbxReplaceBG_Checked"
+                                                  Unchecked="cbxReplaceBG_Checked"/>
+                                        <CheckBox Name="cbxDelSB" Content="删除Storyboard" Grid.Row="1" Style="{StaticResource cbxCol0}"
+                                                    IsChecked="{Binding Path=IsDelSb}"/>
+                                        <CheckBox Name="cbxDelHitSound" Content="删除音效" Grid.Row="1" Style="{StaticResource cbxCol1}"
+                                                    IsChecked="{Binding Path=IsDelHitSound}"/>                                        
+                                        <CheckBox Name="cbxBackup" Content="自动备份" Grid.Row="2" Style="{StaticResource cbxCol1}"
+                                                    IsChecked="{Binding Path=IsBackup}"/>
+                                        <CheckBox Name="cbxDelRep" Content="删除所有Replay" Grid.Row="2" Style="{StaticResource cbxCol0}"
+                                                    IsChecked="{Binding Path=IsDelRep}"/>
+                                        </Grid> 
+                                    <Button Name="BtnDoWork" Click="BtnDoWork_Click"  Height="38" Width="119" Grid.Column="2" Grid.Row="1"
+                                            Margin="0,0,10,5" HorizontalAlignment="Right" VerticalAlignment="Bottom"
+                                            IsEnabled="{Binding Path=IsNotWorking}">执行</Button>
+                                    </Grid>
+                            </GroupBox>
+                            <GroupBox Header="统计数据" Margin="2,2,2,0" Name="GboxInfo" VerticalAlignment="Top" Height="68">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+                                    <Label Margin="8,5,0,0" Grid.Row="0" Grid.Column="0" Padding="1" Content="本地存在的Beatmap数量: "/>
+                                    <Label Name="Lb1" Margin="0,5,15,0" Grid.Row="0" Grid.Column="0" Padding="1" Content="{Binding Path=Count}" HorizontalAlignment="Right"/>
+                                    <Label Margin="8,3,0,0" Grid.Row="1" Grid.Column="1" Padding="1" Content="缺少的Beatmap数量: "/>
+                                    <Label Name="Lb2" Margin="0,3,15,0" Grid.Row="1" Grid.Column="1" Padding="1" Content="{Binding Path=Count}" HorizontalAlignment="Right"/>
+                                    <Label Margin="8,3,0,0" Grid.Row="1" Grid.Column="0" Padding="1" Content="Ranked的Beatmap总数量: "/>
+                                    <Label Name="Lb3" Margin="0,3,15,0" Grid.Row="1" Grid.Column="0" Padding="1" Content="{Binding Path=Count}" HorizontalAlignment="Right"/>
+                                    <Label Margin="8,5,0,0" Grid.Row="0" Grid.Column="1" Padding="1" Content="重复的Beatmap数量: "/>
+                                    <Label Name="Lb4" Margin="0,5,15,0" Grid.Row="0" Grid.Column="1" Padding="1" Content="{Binding Path=Count}" HorizontalAlignment="Right"/>
+                                </Grid>
+                            </GroupBox>
+                            <GroupBox Header="进度" Margin="2,295,2,0" Name="GboxProc" VerticalAlignment="Top" Height="47" IsEnabled="False">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="22"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock Margin="8,5,0,0">当前操作:</TextBlock>
+                                    <TextBlock Name="procName" Margin="0,5,210,0" HorizontalAlignment="Right" TextAlignment="Center" Text="{Binding Path=ProcName}"></TextBlock>
+                                    <ProgressBar Name="procBar" Margin="0,2,87,0" Width="100" Height="16" HorizontalAlignment="Right"
+                                            Value="{Binding Path=ProcCur}" Maximum="{Binding Path=ProcMax}"/>
+                                    <Button Name="BtnStop" Click="BtnStop_Click" Content="停止操作" Height="20" Width="60" 
+                                            Grid.Column="2" Grid.Row="0" Margin="0,2,10,0" HorizontalAlignment="Right" 
+                                            VerticalAlignment="Top" IsEnabled="{Binding Path=IsWorking}"/>
+                               </Grid>
+                            </GroupBox>
+                        </Grid>
+                    </Border>
+                </TabItem>
+                <TabItem Header="列表" Name="tabList" Selector.Unselected="tabList_Unselected" IsEnabled="False" Selector.Selected="tabList_Selected">
+                    <Border>
+                        <Grid Name="LGrid" Style="{StaticResource tabGrid}" IsEnabled="{Binding Path=IsNotWorking}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Expander Name="expLocal" Grid.Row="0"  IsExpanded="False" Expander.Expanded="expList_Expanded">
+                                <Expander.Header>
+                                    <WrapPanel Height="23">
+                                        <Label Margin="2,3,0,0" Padding="0">本地的Beatmap列表</Label>
+                                        <Button Margin="271,1,1,1" Width="80" Height="21" HorizontalAlignment="Right" Click="BtnSaveHtml_Click">保存本地列表</Button>
+                                    </WrapPanel>
+                                </Expander.Header>
+                                <Grid Height="320">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="23"/>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBox Margin="0" Name="tbxSearch1" TextChanged="tbxSearch_TextChanged"/>
+                                    <ListBox Name="LocalListBox" Style="{StaticResource ListBoxStyle1}" Grid.Row="1"
+                                             HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible" VirtualizingStackPanel.VirtualizationMode="Recycling"
+                                             VirtualizingStackPanel.IsVirtualizing="True" >
+                                    </ListBox>
+                                </Grid>
+                            </Expander>
+                            <Expander Name="expObj" Grid.Row="1" IsExpanded="False" Expanded="expList_Expanded">
+                                <Expander.Header>
+                                    <WrapPanel Height="23">
+                                        <Label Margin="2,3,0,0" Padding="0">缺少的Beatmap列表</Label>
+                                        <Button Margin="271,1,1,1" Width="80" Height="21" HorizontalAlignment="Right" Click="BtnSaveHtml_Click">保存缺少列表</Button>
+                                    </WrapPanel>
+                                </Expander.Header>
+                                <Grid Height="320">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="23"/>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBox Margin="0" Name="tbxSearch2" TextChanged="tbxSearch_TextChanged"/>
+                                    <ListBox Name="ObjListBox" Style="{StaticResource ListBoxStyle1}" Grid.Row="1"
+                                             HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                    </ListBox>
+                                </Grid>
+                            </Expander>
+                            <Expander Name="expDu" Grid.Row="2" IsExpanded="False" Expanded="expList_Expanded">
+                                <Expander.Header>
+                                    <WrapPanel Height="23">
+                                        <Label Margin="2,3,0,0" Padding="0">重复的Beatmap列表</Label>
+                                        <Button Margin="271,1,1,1" Width="80" Height="21" HorizontalAlignment="Right" Click="BtnSaveHtml_Click">保存重复列表</Button>
+                                    </WrapPanel>
+                                </Expander.Header>
+                                <Grid Height="320">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="23"/>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBox Margin="0" Name="tbxSearch3" TextChanged="tbxSearch_TextChanged"/>
+                                    <ListBox Name="CfListBox" Style="{StaticResource ListBoxStyle1}" Grid.Row="1"
+                                             HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                    </ListBox>
+                                </Grid>
+                            </Expander>
+                            <Expander Name="expAll" Grid.Row="3" IsExpanded="False" Expanded="expList_Expanded">
+                                <Expander.Header>
+                                    <WrapPanel Height="23">
+                                        <Label Margin="2,3,0,0" Padding="0">所有的Beatmap列表</Label>
+                                        <Button Margin="271,1,1,1" Width="80" Height="21" HorizontalAlignment="Right" Click="BtnSaveHtml_Click">保存所有列表</Button>
+                                    </WrapPanel>
+                                </Expander.Header>
+                                <Grid Height="320">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="23"/>
+                                        <RowDefinition />
+                                    </Grid.RowDefinitions>
+                                    <TextBox Margin="0"  Name="tbxSearch4" TextChanged="tbxSearch_TextChanged"/>
+                                    <ListBox Name="AllListBox" Style="{StaticResource ListBoxStyle1}" Grid.Row="1"
+                                             HorizontalContentAlignment="Stretch" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                                    </ListBox>
+                                </Grid>
+                            </Expander>
+                        </Grid>
+                    </Border>
+                </TabItem>
+                <TabItem Header="回放管理" Name="tabReplay" PreviewMouseLeftButtonDown="tabReplay_PreviewMouseLeftButtonDown"
+                         IsEnabled="False" Cursor="Hand">                    
+                </TabItem>
+                <TabItem Header="下载队列" Name="tabAbout" PreviewMouseLeftButtonDown="tabAbout_PreviewMouseLeftButtonDown"
+                         IsEnabled="False" Cursor="Hand">
+                </TabItem>
+            </TabControl>
+            <Grid Background="#60FFFFFF" Name="repPanel" Visibility="Hidden">
+                <Border BorderThickness="2" BorderBrush="SlateGray"
+                    Margin="10,50,10,10" MouseDown="repPanel_MouseDown">
+                    <Grid Height="Auto" Background="Snow" Margin="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <Button Style="{StaticResource SysBtnStyle}" Margin="0,1,1,0" Foreground="White" Background="#FFBA1818"
+                                Name="BtnClose2" ToolTip="关闭" Click="BtnClose2_Click">X</Button>
+                        <TextBox Name="tbxSearch5" Margin="1,1,27,0" Height="20" VerticalAlignment="Top" TextChanged="tbxSearch_TextChanged"/>
+                        <ListBox Name="RepListBox" Style="{StaticResource ListBoxStyle2}" 
+                                 HorizontalContentAlignment="Stretch" Margin="0,23,0,0" VerticalAlignment="Top">
+                        </ListBox>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

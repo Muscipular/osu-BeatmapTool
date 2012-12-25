@@ -1,0 +1,132 @@
+﻿<Window x:Class="BeatmapTool.DownloadWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="DownloadWin" WindowStyle="None" WindowStartupLocation="CenterOwner" Background="#00000000"
+        Height="260" Width="340" ResizeMode="NoResize"  AllowsTransparency="True"
+        Icon="/BeatmapTool;component/img/XX.ico" ShowInTaskbar="False">
+    <Window.Resources>
+        <Style x:Key="ListBoxStyle1" TargetType="{x:Type ListBox}">
+            <Setter Property="ItemTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Border BorderBrush="DarkSlateBlue" BorderThickness="1" CornerRadius="3"
+                                Padding="0" Margin="1" Width="Auto" Height="Auto">
+                            <Grid Loaded="StackPanel_Loaded" Focusable="False" Width="313" Height="30">
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style 
+           TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background"
+                Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment"
+                Value="{Binding Path=HorizontalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment"
+                Value="{Binding Path=VerticalContentAlignment,RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Padding"
+                Value="0,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border Name="Bd"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Padding="{TemplateBinding Padding}"
+                            SnapsToDevicePixels="true">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                          SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected"
+                                 Value="true">
+                                <Setter TargetName="Bd"
+                                    Property="Background"
+                                    Value="Transparent"/>
+                                <!--"{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>-->
+                                <Setter Property="Foreground"
+                                    Value="Transparent"/>
+                                <!--"{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"-->
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected"
+                                           Value="true"/>
+                                    <Condition Property="Selector.IsSelectionActive"
+                                           Value="false"/>
+                                </MultiTrigger.Conditions>
+                                <Setter TargetName="Bd"
+                                    Property="Background"
+                                    Value="Transparent"/>
+                                <!--"{DynamicResource {x:Static SystemColors.ControlBrushKey}}"-->
+                                <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+                                <!--Transparent""-->
+                            </MultiTrigger>
+                            <Trigger Property="IsEnabled"
+                                 Value="false">
+                                <Setter Property="Foreground"
+                                    Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Border BorderThickness="1" CornerRadius="3" BorderBrush="#9AABABAB">
+        <Border.BitmapEffect>
+            <OuterGlowBitmapEffect Opacity="0.8" GlowSize="5" GlowColor="#9AABABAB"></OuterGlowBitmapEffect>
+        </Border.BitmapEffect>
+        <StackPanel Background="WhiteSmoke">
+            <Grid Background="#FFE2E2E2" MouseLeftButtonDown="Grid_MouseLeftButtonDown">
+                <TextBlock Padding="3" Name="tbTitle"></TextBlock>
+                <Button Style="{StaticResource BtnStyle1}" Margin="0,1,1,1" Foreground="White" 
+                        Background="#FFBA1818" Height="21" Width="25"
+                        FontWeight="Bold" FontSize="11" HorizontalAlignment="Right" 
+                        VerticalAlignment="Stretch" Padding="0" Cursor="Hand" Focusable="False" IsTabStop="False"
+                        Click="Button_Click" Name="btnHide">H</Button>
+            </Grid>
+            <Border BorderThickness="1"  CornerRadius="3" BorderBrush="#9AABABAB">
+                <Border.BitmapEffect>
+                    <OuterGlowBitmapEffect Opacity="0.8" GlowSize="5" GlowColor="#9AABABAB"></OuterGlowBitmapEffect>
+                </Border.BitmapEffect>
+                <StackPanel>
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Padding" Value="0,5,0,0"/>
+                        </Style>                        
+                    </StackPanel.Resources>
+                    <WrapPanel Margin="2" Name="wp1">
+                        <TextBlock Margin="5,0,3,0" Name="tbId"></TextBlock>
+                        <TextBox Name="tbx1" Width="118" Height="23" Text="{Binding Path=UserName}"></TextBox>
+                        <TextBlock Margin="5,0,3,0" Name="tbPwd"></TextBlock>
+                        <PasswordBox Name="pwd" Width="95" Height="23"></PasswordBox>
+                        <Button Name="btnLogin" Height="23" Margin="2" Click="Button_Click_1" Cursor="Hand"></Button>
+                    </WrapPanel>
+                    <WrapPanel Margin="2" Visibility="Collapsed" Name="wp2"><!---->
+                        <TextBlock Margin="5,0,3,0" Name="tbId2"></TextBlock>
+                        <TextBlock Name="tb1" Width="151" Text="{Binding Path=UserName}"></TextBlock>
+                        <TextBlock Margin="5,0,3,0" Name="tbWait"></TextBlock>
+                        <TextBlock Name="tb2" Width="23" Text="{Binding Path=WaitTime}"></TextBlock>
+                        <TextBlock Margin="0,0,3,0" Name="tbWait2"></TextBlock>
+                        <Button Height="23" Margin="2" Click="Button_Click_2" Cursor="Hand" Name="btnLogout"></Button>
+                    </WrapPanel>
+                    <WrapPanel Margin="2" Name="wp3">
+                        <TextBlock Margin="5,0,3,0" Name="tbDownloadFolder"></TextBlock>
+                        <TextBlock Name="tb3" Width="212" ></TextBlock>
+                        <Button Height="23" Margin="2" Click="Button_Click_3" Cursor="Hand" Name="btnChooseFolder"></Button>
+                    </WrapPanel>
+                    <ListBox Style="{StaticResource ListBoxStyle1}" Height="172"  Background="#ffF5F5F5" BorderThickness="0" 
+                             Focusable="False" ScrollViewer.VerticalScrollBarVisibility="Visible" Name="QueueList" >
+                        
+                    </ListBox>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </Border>
+</Window>
