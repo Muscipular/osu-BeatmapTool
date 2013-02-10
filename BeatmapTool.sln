@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeatmapTool", "BeatmapTool.csproj", "{649337DC-890C-4035-9E16-B0B70EB31B39}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BeatmapTool.Core", "BeatmapTool.Core\BeatmapTool.Core.csproj", "{53CCBAAD-4A3A-4CCB-8F7B-5DB6EFD47B59}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GzipPacker", "GzipPacker\GzipPacker.csproj", "{C5908D11-4FEC-4193-B2AD-560F2273A486}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lib", "lib", "{1F1355F6-B537-46D3-8AAC-122A94FA12DF}"
+	ProjectSection(SolutionItems) = preProject
+		lib\avcodec-53.dll = lib\avcodec-53.dll
+		lib\avformat-53.dll = lib\avformat-53.dll
+		lib\avutil-51.dll = lib\avutil-51.dll
+		lib\Awesomium.Core.dll = lib\Awesomium.Core.dll
+		lib\Awesomium.Core.XML = lib\Awesomium.Core.XML
+		lib\awesomium.dll = lib\awesomium.dll
+		lib\Awesomium.Windows.Controls.Design.dll = lib\Awesomium.Windows.Controls.Design.dll
+		lib\Awesomium.Windows.Controls.dll = lib\Awesomium.Windows.Controls.dll
+		lib\Awesomium.Windows.Controls.XML = lib\Awesomium.Windows.Controls.XML
+		lib\Awesomium.Windows.Forms.dll = lib\Awesomium.Windows.Forms.dll
+		lib\Awesomium.Windows.Forms.XML = lib\Awesomium.Windows.Forms.XML
+		lib\awesomium_pak_utility.exe = lib\awesomium_pak_utility.exe
+		lib\awesomium_process = lib\awesomium_process
+		lib\GzipPacker.exe = lib\GzipPacker.exe
+		lib\icudt.dll = lib\icudt.dll
+		lib\inspector.pak = lib\inspector.pak
+		lib\libEGL.dll = lib\libEGL.dll
+		lib\libGLESv2.dll = lib\libGLESv2.dll
+		lib\Newtonsoft.Json.dll = lib\Newtonsoft.Json.dll
+		lib\SDL.dll = lib\SDL.dll
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{649337DC-890C-4035-9E16-B0B70EB31B39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{649337DC-890C-4035-9E16-B0B70EB31B39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{649337DC-890C-4035-9E16-B0B70EB31B39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{649337DC-890C-4035-9E16-B0B70EB31B39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53CCBAAD-4A3A-4CCB-8F7B-5DB6EFD47B59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53CCBAAD-4A3A-4CCB-8F7B-5DB6EFD47B59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53CCBAAD-4A3A-4CCB-8F7B-5DB6EFD47B59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53CCBAAD-4A3A-4CCB-8F7B-5DB6EFD47B59}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5908D11-4FEC-4193-B2AD-560F2273A486}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5908D11-4FEC-4193-B2AD-560F2273A486}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5908D11-4FEC-4193-B2AD-560F2273A486}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5908D11-4FEC-4193-B2AD-560F2273A486}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

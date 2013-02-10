@@ -1,0 +1,12 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:awe="http://schemas.awesomium.com/winfx"
+        x:Class="BeatmapTool.Core.MainWindow"
+        Title="MainWindow" Height="450" Width="750" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" SizeToContent="WidthAndHeight">
+    <awe:WebControl Name="webControl" 
+                    Height="450" 
+                    Width="700"
+                    Focusable="False"
+         />
+</Window>
