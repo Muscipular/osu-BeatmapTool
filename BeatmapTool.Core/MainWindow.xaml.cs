@@ -1,11 +1,10 @@
-﻿using System.Windows.Input;
-using Awesomium.Core;
+﻿using Awesomium.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
-using Awesomium.Core.Data;
+
 
 namespace BeatmapTool.Core
 {
@@ -29,16 +28,8 @@ namespace BeatmapTool.Core
             var dataPakSource = new GzipDataSource("BeatmapTool.Core.pak");
             webControl.WebSession.AddDataSource("local", dataPakSource);
             webControl.ProcessCreated += OnWebLoad;
-            webControl.SelectionChanged += (sender, args) =>
-            {
-                if (webControl.FocusedElementType != FocusedElementType.EditableContent
-                    && webControl.FocusedElementType != FocusedElementType.TextInput)
-                {
-                    
-                }
-            };
-            webControl.PreviewKeyDown += (sender, args) => args.Handled = webControl.FocusedElementType != FocusedElementType.EditableContent
-                && webControl.FocusedElementType != FocusedElementType.TextInput;
+//            webControl.PreviewKeyDown += (sender, args) => args.Handled = webControl.FocusedElementType != FocusedElementType.EditableContent
+//                && webControl.FocusedElementType != FocusedElementType.TextInput;
             webControl.ShowContextMenu += (sender, args) => args.Handled = !args.Info.IsEditable;
             webControl.Source = new Uri("asset://local/web/index.html");
         }
@@ -50,10 +41,25 @@ namespace BeatmapTool.Core
             jsCommon.window = new JSValue(window);
             window.width = (JavascriptMethodEventHandler)WindowWidth;
             window.height = (JavascriptMethodEventHandler)WindowHeight;
-            window.drag = (JavascriptMethodEventHandler)WindowDrag;
+            //            window.drag = (JavascriptMethodEventHandler)WindowDrag;
             jsCommon.close = (JavascriptMethodEventHandler)AppClose;
+            window.alert = (JavascriptMethodEventHandler)AppAlert;
             ((IDisposable)window).Dispose();
             ((IDisposable)jsCommon).Dispose();
+        }
+        
+        private void AppAlert(object sender, JavascriptMethodEventArgs e)
+        {
+            try
+            {
+                string caption = e.Arguments.Length >= 2 ? e.Arguments[0].ToString() : "";
+                string message = e.Arguments.Length >= 2 ? e.Arguments[1].ToString() : e.Arguments.Length == 1 ? e.Arguments[0].ToString() : "";
+                e.Result = new JSValue((int)(MessageBox.Show(this, message, caption)));
+            }
+            catch (Exception)
+            {
+                e.Result = JSValue.Undefined;
+            }
         }
 
         private void WindowDrag(object sender, JavascriptMethodEventArgs e)

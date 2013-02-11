@@ -9,7 +9,7 @@ using Awesomium.Core.Data;
 
 namespace BeatmapTool.Core
 {
-    public class GzipDataSource : AsyncDataSource
+    public class GzipDataSource : DataSource
     {
         public string FilePath { get; private set; }
 
@@ -76,7 +76,7 @@ namespace BeatmapTool.Core
             return File.Open(FilePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         }
 
-        protected override void LoadResourceAsync(DataSourceRequest request)
+        protected override void OnRequest(DataSourceRequest request)
         {
             var path = request.Path.ToLower();
             if (!(_dataPak.ContainsKey(path)))

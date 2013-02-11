@@ -13,7 +13,7 @@
 				}
 				var args = Array.prototype.slice.call(arguments);
 				this.ctor.apply(this, args);
-			};
+			}
 		}
 		var Class = getClass();
 		prototype = prototype ? prototype : {};

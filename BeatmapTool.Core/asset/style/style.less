@@ -1,0 +1,120 @@
+@black: #000;
+@window-height: 450px;
+@window-width: 700px;
+@bg-color: #ededed;
+
+.noPadding{
+	padding: 0;
+}
+
+.noMargin{
+	margin: 0;
+}
+
+.noPaddingMargin{
+	padding: 0;
+	margin: 0;
+}
+
+.left{
+	float: left;
+}
+
+.right{
+	float: right;
+}
+
+body{
+	-webkit-user-select: none;
+	background: @bg-color;
+	.noPaddingMargin;
+}
+
+li, ul, dd{
+	text-decoration: none;
+	outline-style: none;
+	list-style: none;
+}
+
+#loading-layer{
+	width: @window-width;
+	height: @window-height;
+	z-index: 999999;
+	background-color: #fdfdfd;
+	background-repeat: no-repeat;
+	position: absolute;
+	background-image: url('../image/loading.gif');
+	background-position: center center;
+}
+
+@main-nav-width: 100px;
+@main-nav-bg: #b6cbe5;
+#main-nav{
+	.left;
+	width: @main-nav-width;
+	height: @window-height;
+	background-color: @main-nav-bg;
+
+	.boxed{
+		.noPaddingMargin;
+		.boxed-item (@nav-button-height: 40px,@box-item-margin: 5px,@box-item-border-width: 1px) {
+			margin: @box-item-margin;
+			width: @main-nav-width - @box-item-margin*2 - @box-item-border-width*2;
+			height: @nav-button-height;
+			line-height: @nav-button-height;
+			border-style: solid;
+			border-width: @box-item-border-width;
+			border-radius: 1px;
+			text-align: center;
+		}
+		li {
+			cursor: pointer;
+			.boxed-item;
+			color: #e4eff9;
+			background-color: #3d79b6;
+			border-color: #cde3f9;
+		}
+	}
+}
+
+#content{
+	.left;
+	width: @window-width - @main-nav-width;	
+	height: @window-height;
+	overflow: hidden;
+}
+
+#esu-layer{
+	#esu-nav{
+		width: 100%;
+		.noMargin;
+		padding: 5px;
+		background-color: #cadff9;
+		line-height: 24px;
+		* {
+			display: inline-block;			
+		}
+		span {
+			min-width: 50px;
+			text-align: right;
+		}
+		#esu-nav-2{
+			display: none;
+		}
+		#esu-login{
+			color: #e4eff9;
+			border-style: solid;
+			border-color: #cde3f9;
+			border-width: 1px;
+			text-align: center;
+			width: 80px;
+			height: 22px;
+			background-color: #3d79b6;
+		}
+		#esu-avatar{
+			max-width: 22px;
+			margin-top: 2px;
+			vertical-align: center;
+		}
+	}
+}

@@ -134,9 +134,8 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PreBuildEvent>del "$(SolutionDir)\bin\$(ConfigurationName)\BeatmapTool.Core.pak"
-rem "packing asset"
-"$(SolutionDir)lib\GzipPacker.exe" BeatmapTool.Core.pak "$(ProjectDir)\BeatmapTool.Core\asset" "$(TargetDir)</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
