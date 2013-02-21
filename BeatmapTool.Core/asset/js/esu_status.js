@@ -1,4 +1,5 @@
 var esu = {
+	_init: false,
 	user: {
 		userId: '',
 		password: ''
@@ -31,27 +32,27 @@ var esu = {
 		}, 'html');
 	},
 	init: function() {
-		if(this.user.userId && this.user.password) {
-			$('#esu-nav-1').hide();
-			$('#esu-nav-2').show();
-			$('#esu-userid-1').val(this.user.userId);
-			$('#esu-userid-2').text(this.user.userId);
-			$('#esu-pwd').val(this.user.password);
-		} else {
+		if(this._init) {
 			$('#esu-userid-1').focus();
+			return;
 		}
-		$('#esu-userid-1').keydown(function(e) {
-			if(e.keyCode == 13) {
-				$('#esu-pwd').focus();
-			}
-		});
-		$('#esu-pwd').keydown(function(e) {
-			if(e.keyCode == 13) {
+		this._init = true;
+		$.get("./esu_status.html", function(data) {
+			$('#content').append(data);
+			$('#esu-userid-1').focus();
+			$('#esu-userid-1').keydown(function(e) {
+				if(e.keyCode == 13) {
+					$('#esu-pwd').focus();
+				}
+			});
+			$('#esu-pwd').keydown(function(e) {
+				if(e.keyCode == 13) {
+					esu.login($('#esu-userid-1').val(), $('#esu-pwd').val());
+				}
+			});
+			$('#esu-login').click(function() {
 				esu.login($('#esu-userid-1').val(), $('#esu-pwd').val());
-			}
-		});
-		$('#esu-login').click(function() {
-			esu.login($('#esu-userid-1').val(), $('#esu-pwd').val());
-		});
+			});
+		}, 'html');
 	}
 }

@@ -17,12 +17,13 @@ var NavMenus = [
 	new NavMenu("恶俗状态", function(item) {
 	if(lastPage != this) {
 		lastPage = this;
-		$('#content').load("./esu_status.html", function() {
-			esu.init();
-		})
+		esu.init();
 	}
 }), new NavMenu("统计信息", function(item) {
-
+	if(lastPage != this) {
+		lastPage = this;
+		beatmap_status.init();
+	}
 }), new NavMenu("本地列表", function(item) {
 
 }), new NavMenu("Rank列表", function(item) {

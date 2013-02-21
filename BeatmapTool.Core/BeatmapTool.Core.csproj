@@ -28,10 +28,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup>
     <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
@@ -92,6 +94,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="asset\style\style.less" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -99,9 +102,16 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="asset\image\loading.gif" />
     <Content Include="asset\js\Beatmap.js" />
+    <Content Include="asset\js\beatmap_status.js" />
     <Content Include="asset\js\CommonHelper.js" />
+    <Content Include="asset\js\esu_status.js" />
+    <Content Include="asset\js\index.js" />
     <Content Include="asset\js\ListParser.js" />
+    <Content Include="asset\style\style.css" />
+    <Content Include="asset\web\beatmap_status.html" />
+    <Content Include="asset\web\esu_status.html" />
     <Content Include="asset\web\index.html" />
   </ItemGroup>
   <ItemGroup>
@@ -113,10 +123,7 @@
   <ItemGroup>
     <Content Include="asset\js\jquery.js" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="asset\image\" />
-    <Folder Include="asset\style\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PreBuildEvent>

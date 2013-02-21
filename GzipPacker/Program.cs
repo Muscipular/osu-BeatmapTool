@@ -19,25 +19,30 @@ namespace GzipPacker
             var pak = args[0];
             var input = args[1];
             var output = args[2];
-
+            
             if (string.IsNullOrEmpty(pak))
             {
+                ShowUsage();
                 return 1;
             }
             if (string.IsNullOrEmpty(input))
             {
+                ShowUsage();
                 return 1;
             }
             if (string.IsNullOrEmpty(output))
             {
+                ShowUsage();
                 return 1;
             }
             if (!Directory.Exists(output))
             {
+                ShowUsage();
                 return 2;
             }
             if (!Directory.Exists(input))
             {
+                ShowUsage();
                 return 3;
             }
             try
@@ -65,11 +70,17 @@ namespace GzipPacker
                 fs.Flush();
                 fs.Dispose();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine(ex.ToString());
                 return -1;
             }
             return 0;
+        }
+
+        private static void ShowUsage()
+        {
+            Console.WriteLine("usage: pakFile inputDir outputDir");
         }
 
         private static void PackDir(List<Tuple<string, int, int>> fileInfo, Stream stream, string dir, string root)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows;
+using Awesomium.Core.Data;
 
 
 namespace BeatmapTool.Core
@@ -27,9 +28,10 @@ namespace BeatmapTool.Core
             });
             var dataPakSource = new GzipDataSource("BeatmapTool.Core.pak");
             webControl.WebSession.AddDataSource("local", dataPakSource);
+            webControl.WebSession.AddDataSource("localfile", new DirectoryDataSource("./session"));
             webControl.ProcessCreated += OnWebLoad;
-//            webControl.PreviewKeyDown += (sender, args) => args.Handled = webControl.FocusedElementType != FocusedElementType.EditableContent
-//                && webControl.FocusedElementType != FocusedElementType.TextInput;
+            //            webControl.PreviewKeyDown += (sender, args) => args.Handled = webControl.FocusedElementType != FocusedElementType.EditableContent
+            //                && webControl.FocusedElementType != FocusedElementType.TextInput;
             webControl.ShowContextMenu += (sender, args) => args.Handled = !args.Info.IsEditable;
             webControl.Source = new Uri("asset://local/web/index.html");
         }
@@ -47,7 +49,7 @@ namespace BeatmapTool.Core
             ((IDisposable)window).Dispose();
             ((IDisposable)jsCommon).Dispose();
         }
-        
+
         private void AppAlert(object sender, JavascriptMethodEventArgs e)
         {
             try
@@ -74,6 +76,7 @@ namespace BeatmapTool.Core
             //                Mouse.AddPreviewMouseMoveHandler(webControl, mouseEventHandler);
             //                this.DragMove();
             //            }
+            this.Activate();
         }
 
         private void AppClose(object sender, JavascriptMethodEventArgs e)
