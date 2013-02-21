@@ -70,7 +70,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="Bridge\App.cs" />
+    <Compile Include="Bridge\Window.cs" />
     <Compile Include="GzipDataSource.cs" />
+    <Compile Include="Helpers\CommonHelper.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

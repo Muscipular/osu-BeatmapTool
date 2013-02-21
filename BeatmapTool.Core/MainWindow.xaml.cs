@@ -38,77 +38,19 @@ namespace BeatmapTool.Core
 
         private void OnWebLoad(object sender, EventArgs e)
         {
+            var app = new Bridge.App();
+            var win = new Bridge.Win(this);
             dynamic jsCommon = (JSObject)webControl.CreateGlobalJavascriptObject("$APP");
             dynamic window = (JSObject)webControl.CreateGlobalJavascriptObject("$APP_Window");
             jsCommon.window = new JSValue(window);
-            window.width = (JavascriptMethodEventHandler)WindowWidth;
-            window.height = (JavascriptMethodEventHandler)WindowHeight;
-            //            window.drag = (JavascriptMethodEventHandler)WindowDrag;
-            jsCommon.close = (JavascriptMethodEventHandler)AppClose;
-            window.alert = (JavascriptMethodEventHandler)AppAlert;
+            window.width = (JavascriptMethodEventHandler)win.Width;
+            window.height = (JavascriptMethodEventHandler)win.Height;
+            jsCommon.close = (JavascriptMethodEventHandler)app.Exit;
+            window.alert = (JavascriptMethodEventHandler)win.Alert;
+            jsCommon.hashString = (JavascriptMethodEventHandler) app.HashString;
+            jsCommon.hashFile = (JavascriptMethodEventHandler) app.HashFile;
             ((IDisposable)window).Dispose();
             ((IDisposable)jsCommon).Dispose();
-        }
-
-        private void AppAlert(object sender, JavascriptMethodEventArgs e)
-        {
-            try
-            {
-                string caption = e.Arguments.Length >= 2 ? e.Arguments[0].ToString() : "";
-                string message = e.Arguments.Length >= 2 ? e.Arguments[1].ToString() : e.Arguments.Length == 1 ? e.Arguments[0].ToString() : "";
-                e.Result = new JSValue((int)(MessageBox.Show(this, message, caption)));
-            }
-            catch (Exception)
-            {
-                e.Result = JSValue.Undefined;
-            }
-        }
-
-        private void WindowDrag(object sender, JavascriptMethodEventArgs e)
-        {
-            e.Result = JSValue.Undefined;
-            //            if (Mouse.LeftButton == MouseButtonState.Pressed)
-            //            {
-            //                MouseEventHandler mouseEventHandler = (o, args) =>
-            //                {
-            //                    this.OnMouseMove(args);
-            //                };
-            //                Mouse.AddPreviewMouseMoveHandler(webControl, mouseEventHandler);
-            //                this.DragMove();
-            //            }
-            this.Activate();
-        }
-
-        private void AppClose(object sender, JavascriptMethodEventArgs e)
-        {
-            e.Result = JSValue.Undefined;
-            this.Close();
-        }
-
-        private void WindowHeight(object sender, JavascriptMethodEventArgs e)
-        {
-            e.Result = new JSValue(this.Height);
-            if (e.Arguments.Length == 0)
-            {
-                return;
-            }
-            if (e.Arguments[0].IsNumber)
-            {
-                e.Result = new JSValue(this.Height = (float)e.Arguments[0]);
-            }
-        }
-
-        private void WindowWidth(object sender, JavascriptMethodEventArgs e)
-        {
-            e.Result = new JSValue(this.Width);
-            if (e.Arguments.Length == 0)
-            {
-                return;
-            }
-            if (e.Arguments[0].IsNumber)
-            {
-                e.Result = new JSValue(this.Width = (float)e.Arguments[0]);
-            }
         }
     }
 }

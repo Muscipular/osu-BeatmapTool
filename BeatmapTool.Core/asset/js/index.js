@@ -48,6 +48,8 @@ var app = {
 			$('#main-nav .boxed').append(o);
 		};
 	},
+	rankList = [],
+	localList = [],
 }
 
 $(document).ready(function() {
